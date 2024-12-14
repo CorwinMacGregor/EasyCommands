@@ -20,6 +20,7 @@ namespace IngameScript {
 
                 customData = PROGRAM.Me.CustomData;
                 commandStrings = customData
+                    .Remove(CustomData.IndexOf("---"))
                     .Trim()
                     .Split(new[] { "\r\n", "\r", "\n" }, StringSplitOptions.None)
                     .SkipWhile(line => {
