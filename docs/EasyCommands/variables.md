@@ -36,7 +36,7 @@ Sometimes you might want to create strings that include spaces, double quotes, o
 By default, double quoted strings are considered as possible [Selectors](https://spaceengineers.merlinofmines.com/EasyCommands/selectors "Selectors").  The parser should figure out whether you intended it to be a string or a selector, but in some cases you may need to wrap your string.
 
 To wrap double quotes so that they appear in your static string, wrap the entire string with single quotes (').
-To wrap single quotes so that they appear in your static stirng, wrap the entire string with tildes (\`).
+To wrap single quotes so that they appear in your static stirng, wrap the entire string with grave accents (\`).
 
 
 ```
