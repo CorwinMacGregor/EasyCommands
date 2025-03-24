@@ -12,7 +12,7 @@ If your script finishes executing all threads (both queued and async) and you ex
 ### Queued Threads
 EasyCommands keeps a queue of threads to execute, which it executes from first to last (hence, queue).  By default, the Main thread is the first in the queue.  If you queue up more commands to execute using the queue command, those requests will be put on the back of the queue and then executed once the main thread is finished.
 
-This enables you to queue up things for your script to do once it's done with the current task.  This might include building items, creating things from your factory, etc.
+This enables you to queue up things for your script to do once it is done with the current task.  This might include building items, creating things from your factory, etc.
 
 Again, only the first queued thread is executed per tick.
 
@@ -41,9 +41,9 @@ until i > 120
 ```
 
 #### Requested Command Threads
-When you invoke your EasyCommands script with an argument, either using a button, or "Run with Argument", or cross-grid communication, this creates a new Queued Thread and puts it at the beginning of the Thread Queue.  This effectively pauses the main thread and starts executing the requested command to completion instead.
+When you invoke your EasyCommands script with an argument, through the programming block's terminal interface 'Run' editbox, with the programming block's "Run with Argument" toolbar action (such as configured on a button, timer, or cockpit), or through cross-grid communication, this creates a new Queued Thread and puts it at the beginning of the Thread Queue.  This effectively pauses the main thread and starts executing the requested command to completion instead.
 
-Note that invoking your EasyCommands script in this way does not terminate the main thread, it just pauses it.  So don't expect the main thread to stop running just because you tried to interrupt it.  If this is the behavior you desire, have your main function sit idle (```wait until false```) or manage your script's "mode" using a global [Variables](https://spaceengineers.merlinofmines.com/EasyCommands/blockHandlers/variables "Variables").
+Note that invoking your EasyCommands script in this way does not terminate the main thread, it just pauses it.  So don't expect the main thread to stop running just because you tried to interrupt it.  If this is the behavior you desire, have your main function sit idle (```wait until false```) or manage your script's "mode" using a global [variable](https://spaceengineers.merlinofmines.com/EasyCommands/blockHandlers/variables "Variables").
 
 See [Invoking Your Script](https://spaceengineers.merlinofmines.com/EasyCommands/blockHandlers/invoking "Invoking Your Script") for more information on invoking your script.
 
@@ -118,7 +118,7 @@ replay
 
 ### Requested Command Thread Variables
 
-Since requested commands are given their own thread, they *do not inherit* variables from the main thread.  If you want those commands to have access to variables you will need to make those variables ```global```.
+Since requested commands (via toolbar 'Run' actions, the 'Run' editbox in the programming block's terminal, or cross-grid communication) are given their own thread, they *do not inherit* variables from the main thread.  If you want those commands to have access to variables you will need to make those variables ```global```.
 
 Consider the following script.  It has a variable for "myDoors" since that is used multiple times.  The functions are supposed to be called using a button or similar.
 
