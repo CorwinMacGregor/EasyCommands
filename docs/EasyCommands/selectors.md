@@ -37,7 +37,7 @@ extend the "Elevator Pistons" piston group
 
 ### Implicit Block Types
 
-It's often the case that the name of the block, or block group, you are selecting contains what kind of block it is.  For these cases, it is OK to emit the block type.  EasyCommands will infer the block type (and if it is a group) based on the name of the entity.
+It's often the case that the name of the block, or block group, you are selecting contains what kind of block it is.  For these cases, it is OK to omit the block type.  EasyCommands will infer the block type (and if it is a group) based on the name of the entity.
 ```
 #Assume Elevator Pistons is a Block Group of Pistons
 extend the "Elevator Pistons"
@@ -123,7 +123,7 @@ turn on "Base Batteries"[0..2]
 turn on "Base Batteries"[0..2, "Extra Battery"]
 ```
 
-If a supplied index is greater than the number of blocks, or if the selector does not include a block named for the string selecctor, then the selector returns an empty set of blocks to act on.
+If a supplied index is greater than the number of blocks, or if the selector does not include a block named for the string selector, then the selector returns an empty set of blocks to act on.
 
 Index Selectors can be used in combination with any other Selector modifier, such as Conditions.  I recommend parentheses to make it clear what you intend as the final result.
 

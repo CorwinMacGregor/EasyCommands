@@ -10,13 +10,13 @@ Default Primitive Properties:
 * Vector - position
 
 ## Controlling Unsupported Block Types
-It's impossible to model all Block Types in Space Engineers, since you might have mods installed that add new block types that EasyCommands doesn't know about.  Luckily, since almost all blocks inherit from Terminal Block, you can control most of those block's even if they don't have an explicit handler of their own.  So, if you find there's a block type (which is a Terminal Block) without a block handler (including 3P block types from mods), you can get some control over it's properties with this Block Handler. 
+It is impossible to model all Block Types in Space Engineers, since you might have mods installed that add new block types that EasyCommands doesn't know about.  Luckily, since almost all blocks inherit from Terminal Block, you can control most of those blocks even if they don't have an explicit handler of their own.  So, if you find there's a block type (which is a Terminal Block) without a block handler (including third-party block types from mods), you can get some control over its properties with this Block Handler. 
 
 Here's a script to print out properties & values for an unsupported block:
 
 ```
 set unknownBlock to "Unknown Block"
-#Print a set of supported properties for the given blcok
+#Print a set of supported properties for the given block
 Print $unknownBlock terminal properties
 
 #Print out current property names and values
@@ -34,7 +34,7 @@ And a similar script for printing out available actions for an unsupported Block
 
 ```
 set unknownBlock to "Unknown Block"
-#Print a set of supported actions for the given blcok
+#Print a set of supported actions for the given block
 Print $unknownBlock terminal actions
 
 #Print out current property names and values
@@ -128,7 +128,7 @@ set my data to ""
 * Primitive Type: String
 * Keywords: ```info, details, detailedinfo```
 
-Returns the detailed info of the block. `DetailedInfo` contains the text on the right hand site of the terminal menu.
+Returns the detailed info of the block. `DetailedInfo` contains the text on the right hand side of the terminal menu.
 
 ```
 set myInfo to "Battery" details split "\n"
@@ -291,7 +291,7 @@ print "Max Integrity: " + "My Turret" build limit
 * Primitive Type: Numeric
 * Keywords: ```built ratio, build percentage```
 
-Returns the effective built ratio of the block as a value between 0 and 1 by returning the current build integrity of the block minus any damage the block has taken and then dividing by the blocks maximum integrity.  This property is useful for getting the % built of any block.
+Returns the effective built ratio of the block as a value between 0 and 1 by returning the current build integrity of the block minus any damage the block has taken and then dividing by the block's maximum integrity.  This property is useful for getting the % built of any block.
 
 ```
 Print "Build Ratio: " + "My Turret" build ratio
