@@ -386,6 +386,7 @@ namespace IngameScript {
             AddBlockWords(Words("jump", "jumpdrive"), Block.JUMPDRIVE);
             AddBlockWords(Words("laser", "laserantenna"), Block.LASER_ANTENNA);
             AddBlockWords(Words("terminal"), Block.TERMINAL);
+            AddBlockWords(Words("functional"), Block.FUNCTIONAL);
             AddBlockWords(Words("refinery"), Words("refineries"), Block.REFINERY);
             AddBlockWords(Words("heatvent"), Block.HEAT_VENT);
             AddBlockWords(Words("searchlight"), Block.SEARCHLIGHT);

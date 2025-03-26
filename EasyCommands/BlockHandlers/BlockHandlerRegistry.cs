@@ -45,6 +45,7 @@ namespace IngameScript {
                 { Block.DRILL, new FunctionalBlockHandler<IMyShipDrill>() },
                 { Block.EJECTOR, new EjectorBlockHandler() },
                 { Block.ENGINE, new EngineBlockHandler<IMyPowerProducer>("Engine") },
+                { Block.FUNCTIONAL, new FunctionalBlockHandler<IMyFunctionalBlock>() },
                 { Block.GENERATOR, new GasGeneratorHandler()},
                 { Block.GRAVITY_GENERATOR, new GravityGeneratorBlockHandler() },
                 { Block.GRAVITY_SPHERE, new SphericalGravityGeneratorBlockHandler() },

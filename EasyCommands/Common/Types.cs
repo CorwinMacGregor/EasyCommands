@@ -42,6 +42,7 @@ namespace IngameScript {
             DRILL,
             EJECTOR,
             ENGINE,
+            FUNCTIONAL,
             GENERATOR,
             GRAVITY_GENERATOR,
             GRAVITY_SPHERE,
