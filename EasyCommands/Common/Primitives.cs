@@ -56,19 +56,28 @@ namespace IngameScript {
                 CastFunction(Return.BOOLEAN, p => CastBoolean(p) ? 1.0f : 0.0f),
                 CastFunction(Return.NUMERIC, p => (float)p.value),
                 CastFunction(Return.STRING, p => float.Parse(CastString(p))),
+                CastFunction(Return.RECT, p => (float)CastRect(p).Length()),
                 CastFunction(Return.VECTOR, p => (float)CastVector(p).Length()),
                 CastFunction(Return.DEFAULT, Failure(Return.NUMERIC))
             )),
             KeyValuePair(typeof(string), NewDictionary(
                 CastFunction(Return.NUMERIC, p => CastNumber(p).ToString(PROGRAM.globalVariables[NUMBER_FORMAT].GetValue().value + "")),
+                CastFunction(Return.RECT, p => RectToString(CastRect(p))),
                 CastFunction(Return.VECTOR, p => VectorToString(CastVector(p))),
                 CastFunction(Return.COLOR, p => ColorToString(CastColor(p))),
                 CastFunction(Return.LIST, p => CastList(p).Print()),
                 CastFunction(Return.DEFAULT, p => "" + p.value)
 
             )),
+            KeyValuePair(typeof(Vector2), NewDictionary(
+                CastFunction(Return.STRING, p => GetRect(CastString(p)).Value),
+                CastFunction(Return.RECT, p => p.value),
+                CastFunction(Return.VECTOR, p => Rect(CastVector(p).X, CastVector(p).Y)),
+                CastFunction(Return.DEFAULT, Failure(Return.RECT))
+            )),
             KeyValuePair(typeof(Vector3D), NewDictionary(
                 CastFunction(Return.STRING, p => GetVector(CastString(p)).Value),
+                CastFunction(Return.RECT, p => Vector(CastRect(p).X, CastRect(p).Y, 0.0f)),
                 CastFunction(Return.VECTOR, p => p.value),
                 CastFunction(Return.COLOR, p => Vector(CastColor(p).R, CastColor(p).G, CastColor(p).B)),
                 CastFunction(Return.DEFAULT, Failure(Return.VECTOR))
@@ -81,6 +90,7 @@ namespace IngameScript {
                 CastFunction(Return.DEFAULT, Failure(Return.COLOR))
             )),
             KeyValuePair(typeof(KeyedList), NewDictionary(
+                CastFunction(Return.RECT, p => NewKeyedList(new KeyedVariable("X", CastRect(p).X), new KeyedVariable("Y", CastRect(p).Y))),
                 CastFunction(Return.LIST, p => p.value),
                 CastFunction(Return.DEFAULT, p => NewKeyedList(Once(GetStaticVariable(p.value))))
             ))
@@ -92,6 +102,7 @@ namespace IngameScript {
             KeyValuePair(typeof(float), Return.NUMERIC),
             KeyValuePair(typeof(int), Return.NUMERIC),
             KeyValuePair(typeof(double), Return.NUMERIC),
+            KeyValuePair(typeof(Vector2), Return.RECT),
             KeyValuePair(typeof(Vector3D), Return.VECTOR),
             KeyValuePair(typeof(Color), Return.COLOR),
             KeyValuePair(typeof(KeyedList), Return.LIST)
@@ -109,6 +120,7 @@ namespace IngameScript {
         public static bool CastBoolean(Primitive p) => Cast<bool>(p);
         public static float CastNumber(Primitive p) => Cast<float>(p);
         public static string CastString(Primitive p) => Cast<string>(p).Replace("\\n", "\n");
+        public static Vector2 CastRect(Primitive p) => Cast<Vector2>(p);
         public static Vector3D CastVector(Primitive p) => Cast<Vector3D>(p);
         public static Color CastColor(Primitive p) => Cast<Color>(p);
         public static KeyedList CastList(Primitive p) => Cast<KeyedList>(p);
@@ -126,7 +138,16 @@ namespace IngameScript {
             }
             return components.Count() == 3 ? Vector(components[0], components[1], components[2]) : (Vector3D?)null;
         }
+        public static Vector2? GetRect(String s) {
+            var components = NewList<float>();
+            foreach (string component in s.Split(':')) {
+                float result;
+                if (Float.TryParse(component, out result)) components.Add(result);
+            }
+            return components.Count() == 2 ? Rect(components[0], components[1]) : (Vector2?)null;
+        }
 
+        static string RectToString(Vector2 rect) => rect.X + ":" + rect.Y;
         static string VectorToString(Vector3D vector) => vector.X + ":" + vector.Y + ":" + vector.Z;
         static string ColorToString(Color color) => "#" + IntToHex(color.R) + IntToHex(color.G) + IntToHex(color.B);
 

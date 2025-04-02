@@ -40,6 +40,7 @@ namespace IngameScript {
             KeyValuePair(Return.BOOLEAN, "boolean"),
             KeyValuePair(Return.NUMERIC, "number"),
             KeyValuePair(Return.STRING, "string"),
+            KeyValuePair(Return.RECT, "rect"),
             KeyValuePair(Return.VECTOR, "vector"),
             KeyValuePair(Return.COLOR, "color"),
             KeyValuePair(Return.LIST, "list")
@@ -50,6 +51,7 @@ namespace IngameScript {
             CastFunction("boolean", p => CastBoolean(p)),
             CastFunction("string", CastString),
             CastFunction("number", p => CastNumber(p)),
+            CastFunction("rect", p => CastRect(p)),
             CastFunction("vector", p => CastVector(p)),
             CastFunction("color", p => CastColor(p)),
             CastFunction("list", CastList)
@@ -498,9 +500,11 @@ namespace IngameScript {
             var vector = GetVector(token);
             Double numeric;
             var color = GetColor(token);
+            var rect = GetRect(token);
             if (bool.TryParse(token, out boolean)) primitive = ResolvePrimitive(boolean);
             if (Double.TryParse(token, out numeric)) primitive = ResolvePrimitive(numeric);
             if (vector.HasValue) primitive = ResolvePrimitive(vector.Value);
+            if (rect.HasValue) primitive = ResolvePrimitive(rect.Value);  // might be being lazy here, but this shouldn't consume as rect on vector syntax of two semicolons
             if (color.HasValue) primitive = ResolvePrimitive(color.Value);
             return primitive != null;
         }
